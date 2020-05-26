@@ -44,3 +44,13 @@ button {
   border-radius: 30px;
   background-color: white;
 }
+
+.editBTN {
+  width: 60%;
+  font-size: 3rem;
+}
+
+.deactivateBTN {
+  width: 15%;
+  font-size: 0.8rem;
+}
