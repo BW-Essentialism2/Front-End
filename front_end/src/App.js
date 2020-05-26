@@ -1,26 +1,91 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, useEffect} from 'react';
+import { Route, Switch, Link } from 'react-router-dom'
+import ValuesForm from './components/valuesForm'
 
-function App() {
+const initialFormState = {
+  values: {
+    athletic: false,
+    art: false,
+    creativity: false,
+    independence: false,
+    kindness: false,
+    living: false,
+    membership: false,
+    music: false,
+    community: false,
+    moral: false,
+    nature: false,
+    relationships: false,
+    humor: false,
+    success: false,
+    other: false,
+  }
+}
+
+const initialFormErrors = {
+    values: {
+    athletic:'',
+    art:'',
+    creativity:'',
+    independence: '',
+    kindness: '',
+    living:'',
+    membership: '',
+    music: '',
+    community: '',
+    moral: '',
+    nature: '',
+    relationships: '',
+    humor: '',
+    success: '',
+    other: '',
+  }
+}
+
+const initialValues = []
+const initialDisabled = true
+
+export default function App() {
+  const [formState, setFormState] = useState(initialFormState)
+  const [formErrors, setFormErrors] = useState(initialFormErrors)
+  const [disabled, setDisabled] = useState(initialDisabled)
+  const [values, setValues] = useState(initialValues)
+
+  const onInputChange= evt => {
+    const name = evt.target.name
+    const value = evt.target.value
+    setFormState({
+      ...formState,
+      [name]: value
+    })
+  }
+
+  const onCheckboxChange = evt => {
+    const { name } = evt.target
+    const { checked } = evt.target
+    setFormState({
+      ...formState,
+      values: {
+        ...formState.values,
+        [name]: checked,
+      }
+    })
+  }
+
+  const onSubmit = evt => {
+    evt.preventDefault()
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ValuesForm
+        values = {formState} 
+        onInputChange = {onInputChange} 
+        onCheckboxChange={onCheckboxChange} 
+        onSubmit = {onSubmit} 
+        disabled={disabled} 
+        errors={formErrors}        
+      />
     </div>
   );
 }
-
-export default App;
