@@ -16,8 +16,8 @@ export const LoginForm = () => {
       .post('https://essentialism-3.herokuapp.com/api/auth/login', loginInput)
       .then((response) => {
         console.log('response from POST request in LOGIN form', response);
-        // localStorage.setItem('token', response.data.payload);
-        // history.push('/loggedInPage');
+        localStorage.setItem('token', response.data.token);
+        history.push('/loggedInPage');
       })
       .catch((error) => console.log('Error from POST in LOGIN form', error));
     setLoginInput({ email: '', password: '' });
@@ -32,7 +32,7 @@ export const LoginForm = () => {
           type="text"
           name="email"
           placeholder="Enter Email Here"
-          value={loginInput.email}
+          value={loginInput.email || ''}
           onChange={handleChange}
         />
       </label>
@@ -42,7 +42,7 @@ export const LoginForm = () => {
           type="password"
           name="password"
           placeholder="Enter Password Here"
-          value={loginInput.password}
+          value={loginInput.password || ''}
           onChange={handleChange}
         />
       </label>

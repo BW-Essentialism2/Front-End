@@ -20,15 +20,15 @@ export const SignUpForm = () => {
       )
       .then((response) => {
         console.log('response from POST request in SIGNUP form', response);
-        // localStorage.setItem('token', response.data.payload);
-        // history.push('/loggedInPage');
+        localStorage.setItem('token', response.data.token);
+        history.push('/loggedInPage');
       })
       .catch((error) => console.log('Error from POST in SIGNUP form', error));
     setSignUpInput({
-      firstName: 'me',
-      lastName: 'hello',
-      email: 'idontknow@gmail.com',
-      password: 'forgetthis',
+      firstname: '',
+      lastname: '',
+      email: '',
+      password: '',
     });
   };
 
@@ -39,9 +39,9 @@ export const SignUpForm = () => {
         Enter First Name:
         <input
           type="text"
-          name="firstName"
+          name="firstname"
           placeholder="Enter First Name Here"
-          value={signUpInput.firstName}
+          value={signUpInput.firstname || ''}
           onChange={handleChange}
         />
       </label>
@@ -49,9 +49,9 @@ export const SignUpForm = () => {
         Enter Last Name:
         <input
           type="text"
-          name="lastName"
+          name="lastname"
           placeholder="Enter Last Name Here"
-          value={signUpInput.lastName}
+          value={signUpInput.lastname || ''}
           onChange={handleChange}
         />
       </label>
@@ -61,7 +61,7 @@ export const SignUpForm = () => {
           type="text"
           name="email"
           placeholder="Enter Email Here"
-          value={signUpInput.email}
+          value={signUpInput.email || ''}
           onChange={handleChange}
         />
       </label>
@@ -71,7 +71,7 @@ export const SignUpForm = () => {
           type="password"
           name="password"
           placeholder="Enter Password Here"
-          value={signUpInput.password}
+          value={signUpInput.password || ''}
           onChange={handleChange}
         />
       </label>
