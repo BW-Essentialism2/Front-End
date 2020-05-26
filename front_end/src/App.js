@@ -12,7 +12,12 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Link to="/login">Log In</Link>
+        <Link className="link" to="/login">
+          Log In
+        </Link>
+        <Link className="link" to="/signUp">
+          Sign Up
+        </Link>
 
         <Switch>
           {/* <Route path='/ROUTE TO LANDING PAGE IN UI REPO'/>*/}

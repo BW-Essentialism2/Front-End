@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 export const LoginForm = () => {
-  const [loginInput, setLoginInput] = useState({ email: '', password: '' });
+  const [loginInput, setLoginInput] = useState({});
+  const history = useHistory();
 
   const handleChange = (event) => {
     setLoginInput({ ...loginInput, [event.target.name]: event.target.value });
@@ -14,13 +16,15 @@ export const LoginForm = () => {
       .post('https://essentialism-3.herokuapp.com/api/auth/login', loginInput)
       .then((response) => {
         console.log('response from POST request in LOGIN form', response);
+        // localStorage.setItem('token', response.data.payload);
+        // history.push('/loggedInPage');
       })
       .catch((error) => console.log('Error from POST in LOGIN form', error));
     setLoginInput({ email: '', password: '' });
   };
 
   return (
-    <form className="login">
+    <form className="login" onSubmit={handleSubmit}>
       <h1>Please Log In Here</h1>
       <label>
         Enter Email Here:
@@ -42,8 +46,7 @@ export const LoginForm = () => {
           onChange={handleChange}
         />
       </label>
-      <button onSubmit={handleSubmit}>Log In</button>
-      <button>Forgot Password?</button>
+      <button type="submit">Log In</button>
     </form>
   );
 };
