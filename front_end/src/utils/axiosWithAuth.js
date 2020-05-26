@@ -6,10 +6,9 @@ export const axiosWithAuth = () => {
         headers: {
             authorization: token
         }
-        baseUrl: ''
+        baseUrl: 'https://essentialism-3.herokuapp.com/api'
     })
 }
 
 //WHICH STORAGE DO I USE??????????
-//What is my BASE URL??????
 //Make sure headers format to get token is correct!!!!!!!

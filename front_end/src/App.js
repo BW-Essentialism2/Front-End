@@ -1,29 +1,26 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
+import { PrivateRoute } from './components/PrivateRoute';
+import { LoginForm } from './components/LoginForm';
+import { SignUpForm } from './components/SignUpForm';
+import { LoggedInPage } from './components/LoggedInPage';
+
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <ul>
-          <li>
-            <Link to="/loggedInPage">My Progress Page</Link>
-          </li>
-          <li>
-            <Link to={/*'/ROUTE TO LANDING PAGE IN UI REPO'*/}>Log Out</Link>{' '}
-            {/*MAY WANT TO HAVE AN ALERT THAT SAYS SUCCESSFULLY LOGGED OUT!!! */}
-          </li>
-        </ul>
+        <Link to="/login">Log In</Link>
+
         <Switch>
           {/* <Route path='/ROUTE TO LANDING PAGE IN UI REPO'/>*/}
           <Route path="/login" component={LoginForm} />
           <Route path="/signUp" component={SignUpForm} />
           <PrivateRoute path="/loggedInPage" component={LoggedInPage} />
-          <PrivateRoute path="/checkList" component={CheckList} />
-          <PrivateRoute path="/dailySelfRating" component={DailySelfRating} />
-          <PrivateRoute path="/dailyProgress" component={DailyProgress} />
+          {/* <PrivateRoute path="/checkList" component={CheckList} /> */}
+          {/* <PrivateRoute path="/dailySelfRating" component={DailySelfRating} /> */}
         </Switch>
       </Router>
     </div>
