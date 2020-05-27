@@ -36,7 +36,7 @@ function App() {
         </Link>
 
         <Switch>
-          <FormStateContext.Provider value={valuesState}>
+          <FormStateContext.Provider value={valueState}>
             {/* <Route path='/ROUTE TO LANDING PAGE IN UI REPO'/>*/}
             <Route path="/login" component={LoginForm} setUser={setUser} />
             <Route path="/signUp" component={SignUpForm} setUser={setUser} />

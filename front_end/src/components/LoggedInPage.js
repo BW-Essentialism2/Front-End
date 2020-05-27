@@ -12,16 +12,16 @@ export const LoggedInPage = (props) => {
   const values = useContext(FormStateContext);
   console.log({ values });
 
-  useEffect(() => {
-    axiosWithAuth()
-      .get('/api/users')
-      .then((response) =>
-        console.log('response from GET request LOGGEDINPAGE', response)
-      )
-      .catch((error) =>
-        console.log('Error from GET request LOGGEDINPAGE', error)
-      );
-  }, []);
+  // useEffect(() => {
+  //   axiosWithAuth()
+  //     .get('/api/users')
+  //     .then((response) =>
+  //       console.log('response from GET request LOGGEDINPAGE', response)
+  //     )
+  //     .catch((error) =>
+  //       console.log('Error from GET request LOGGEDINPAGE', error)
+  //     );
+  // }, []);
 
   return (
     <div className="login">
