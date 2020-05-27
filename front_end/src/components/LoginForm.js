@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-export const LoginForm = () => {
+export const LoginForm = (props) => {
   const [loginInput, setLoginInput] = useState({});
   const history = useHistory();
 
@@ -16,6 +16,7 @@ export const LoginForm = () => {
       .post('https://essentialism-3.herokuapp.com/api/auth/login', loginInput)
       .then((response) => {
         console.log('response from POST request in LOGIN form', response);
+        // props.setUser(response.data);
         localStorage.setItem('token', response.data.token);
         history.push('/loggedInPage');
       })
