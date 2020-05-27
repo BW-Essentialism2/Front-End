@@ -7,22 +7,21 @@ import formSchema from './validation/formSchema'
 import valueSchema from './validation/valueSchema'
 
 const initialValueState = {
-
-    athletic: false,
-    art: false,
-    creativity: false,
-    independence: false,
-    kindness: false,
-    living: false,
-    membership: false,
-    music: false,
-    community: false,
-    moral: false,
-    nature: false,
-    relationships: false,
-    humor: false,
-    success: false,
-    other: false,
+  athletic: false,
+  art: false,
+  creativity: false,
+  independence: false,
+  kindness: false,
+  living: false,
+  membership: false,
+  music: false,
+  community: false,
+  moral: false,
+  nature: false,
+  relationships: false,
+  humor: false,
+  success: false,
+  other: false,
 }
 
 const initialReflectionState = {
@@ -32,23 +31,21 @@ const initialReflectionState = {
 }
 
 const initialFormErrors = {
-    values: {
-      athletic:'',
-      art:'',
-      creativity:'',
-      independence: '',
-      kindness: '',
-      living:'',
-      membership: '',
-      music: '',
-      community: '',
-      moral: '',
-      nature: '',
-      relationships: '',
-      humor: '',
-      success: '',
-      other: '',
-  }
+  athletic:'',
+  art:'',
+  creativity:'',
+  independence: '',
+  kindness: '',
+  living:'',
+  membership: '',
+  music: '',
+  community: '',
+  moral: '',
+  nature: '',
+  relationships: '',
+  humor: '',
+  success: '',
+  other: '',
 }
 
 const initialValues = []
@@ -58,12 +55,28 @@ export default function App() {
   const [valueState, setValueState] = useState(initialValueState)
   const [formErrors, setFormErrors] = useState(initialFormErrors)
   const [disabled, setDisabled] = useState(initialDisabled)
-  const [values, setValues] = useState(initialValues)
+  // const [values, setValues] = useState(initialValues)
   const [reflectionState, setReflectionState] = useState(initialReflectionState)
 
   const onInputChange= evt => {
     const name = evt.target.name
     const value = evt.target.value
+
+    // yup
+    //   .reach(valueSchema, name)
+    //   .validate(value)
+    //   .then(valid => {
+    //      setFormErrors({
+    //        ...formErrors,
+    //        [name]: ''
+    //      });
+    //    })
+    //   .catch(err => {
+    //      setFormErrors({
+    //        ...formErrors,
+    //        [name]: err.errors[0]
+    //      });
+    //    })
 
     yup
       .reach(formSchema, name)

@@ -131,17 +131,18 @@ export default function ValuesForm(props){
                     </label>
 
                     <label>Other&nbsp;
+
+                        <input type='checkbox'
+                               name='other'
+                               checked={values.other}
+                               onChange={onCheckboxChange}
+                        />
                         {/* <input type='text'
                                name='other'
                                placeholder='Type other value here'
                                values={values.other}
                                onChange={onInputChange}
-                        /> */}
-                        <input type='checkbox'
-                               name='other'
-                               checked={values.other}
-                               onChange={onCheckboxChange}
-                        />                        
+                        />        */}
                     </label>
 
                 </div>
