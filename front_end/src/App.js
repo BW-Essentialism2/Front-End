@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Route, Switch, Link } from 'react-router-dom'
 import ValuesForm from './components/valuesForm'
+import SelfReflectionForm from './components/selfReflectionForm'
 
 const initialFormState = {
   values: {
@@ -20,6 +21,12 @@ const initialFormState = {
     success: false,
     other: false,
   }
+}
+
+const initialReflectionState = {
+  value1: '',
+  value2: '',
+  value3: '',
 }
 
 const initialFormErrors = {
@@ -50,6 +57,7 @@ export default function App() {
   const [formErrors, setFormErrors] = useState(initialFormErrors)
   const [disabled, setDisabled] = useState(initialDisabled)
   const [values, setValues] = useState(initialValues)
+  const [reflectionState, setReflectionState] = useState(initialReflectionState)
 
   const onInputChange= evt => {
     const name = evt.target.name
@@ -58,6 +66,10 @@ export default function App() {
       ...formState,
       [name]: value
     })
+    setReflectionState({
+    ...reflectionState,
+      [name]: value
+  })  
   }
 
   const onCheckboxChange = evt => {
@@ -85,6 +97,12 @@ export default function App() {
         onSubmit = {onSubmit} 
         disabled={disabled} 
         errors={formErrors}        
+      />
+
+      <SelfReflectionForm
+        values = {reflectionState}
+        onInputChange = {onInputChange}
+        onSubmit = {onSubmit}
       />
     </div>
   );

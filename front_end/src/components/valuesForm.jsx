@@ -76,8 +76,8 @@ export default function ValuesForm(props){
 
                     <label>Music&nbsp;
                         <input type='checkbox'
-                               name='athletic'
-                               checked={values.values.athletic}
+                               name='music'
+                               checked={values.values.music}
                                onChange={onCheckboxChange}
                         />
                     </label>
@@ -140,7 +140,7 @@ export default function ValuesForm(props){
                     </label>
 
                 </div>
-                <button>Submit</button>
+                <button>Next</button>
             </form>
         </div>
     )
