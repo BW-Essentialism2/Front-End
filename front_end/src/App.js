@@ -115,22 +115,31 @@ export default function App() {
 
   return (
     <div className="App">
-      <ValuesForm
-        values = {formState} 
-        onInputChange = {onInputChange} 
-        onCheckboxChange={onCheckboxChange} 
-        onSubmit = {onSubmit} 
-        disabled={disabled} 
-        errors={formErrors}        
-      />
-
-      <SelfReflectionForm
-        values = {reflectionState}
-        onInputChange = {onInputChange}
-        onSubmit = {onSubmit}
-        disabled={disabled}
-        errors={formErrors}
-      />
+      <nav>
+        <Link to ='/values'>Values Selection</Link>
+        <Link to ='/reflection'>Self Reflection</Link>
+      </nav>
+      <Switch>
+        <Route path = '/values'>
+          <ValuesForm
+            values = {formState} 
+            onInputChange = {onInputChange} 
+            onCheckboxChange={onCheckboxChange} 
+            onSubmit = {onSubmit} 
+            disabled={disabled} 
+            errors={formErrors}        
+          />
+        </Route>
+        <Route path ='/reflection'>
+          <SelfReflectionForm
+            values = {reflectionState}
+            onInputChange = {onInputChange}
+            onSubmit = {onSubmit}
+            disabled={disabled}
+            errors={formErrors}
+          />
+        </Route>
+      </Switch>
     </div>
   );
 }
