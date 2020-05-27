@@ -12,18 +12,15 @@ export default function SelfReflectionForm(props){
 
     return (
         <div>
-            <p>{details} </p>
+            <h3>In a few sentences, describe why the selected values are important to you. Focus on your thoughts/feelings, and don’t worry about spelling, grammar, or how well-written it is.</h3>
             <form onSubmit={onSubmit}>
-                <h3>In a few sentences, describe why the selected values are important to you. Focus on your thoughts/feelings, and don’t worry about spelling, grammar, or how well-written it is.</h3>
-                <div>{errors.value1}</div>  
+                <div>{errors.value1}</div>
                 <input type='text'
                        name='value1'
                        placeholder='Type response here'
                        values={values.value1}
                        onChange={onInputChange}
                 />
-
-                <h3>In a few sentences, describe why the selected values are important to you. Focus on your thoughts/feelings, and don’t worry about spelling, grammar, or how well-written it is.</h3>
                 <div>{errors.value2}</div>
                 <input type='text'
                        name='value2'
@@ -31,8 +28,6 @@ export default function SelfReflectionForm(props){
                        values={values.value2}
                        onChange={onInputChange}
                 />
-
-                <h3>In a few sentences, describe why the selected values are important to you. Focus on your thoughts/feelings, and don’t worry about spelling, grammar, or how well-written it is.</h3>
                 <div>{errors.value3}</div>
                 <input type='text'
                        name='value3'
@@ -41,7 +36,7 @@ export default function SelfReflectionForm(props){
                        onChange={onInputChange}
                 />         
             </form>
-            <button disabled={disabled}>Next</button>
+            <button disabled={disabled} onSubmit={onSubmit}>Next</button>
         </div>
     )
 }

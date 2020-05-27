@@ -4,9 +4,10 @@ import ValuesForm from './components/valuesForm'
 import SelfReflectionForm from './components/selfReflectionForm'
 import * as yup from 'yup'
 import formSchema from './validation/formSchema'
+import valueSchema from './validation/valueSchema'
 
-const initialFormState = {
-  values: {
+const initialValueState = {
+
     athletic: false,
     art: false,
     creativity: false,
@@ -22,7 +23,6 @@ const initialFormState = {
     humor: false,
     success: false,
     other: false,
-  }
 }
 
 const initialReflectionState = {
@@ -33,21 +33,21 @@ const initialReflectionState = {
 
 const initialFormErrors = {
     values: {
-    athletic:'',
-    art:'',
-    creativity:'',
-    independence: '',
-    kindness: '',
-    living:'',
-    membership: '',
-    music: '',
-    community: '',
-    moral: '',
-    nature: '',
-    relationships: '',
-    humor: '',
-    success: '',
-    other: '',
+      athletic:'',
+      art:'',
+      creativity:'',
+      independence: '',
+      kindness: '',
+      living:'',
+      membership: '',
+      music: '',
+      community: '',
+      moral: '',
+      nature: '',
+      relationships: '',
+      humor: '',
+      success: '',
+      other: '',
   }
 }
 
@@ -55,7 +55,7 @@ const initialValues = []
 const initialDisabled = true
 
 export default function App() {
-  const [formState, setFormState] = useState(initialFormState)
+  const [valueState, setValueState] = useState(initialValueState)
   const [formErrors, setFormErrors] = useState(initialFormErrors)
   const [disabled, setDisabled] = useState(initialDisabled)
   const [values, setValues] = useState(initialValues)
@@ -80,8 +80,8 @@ export default function App() {
           [name]: err.errors[0]
         });
       });    
-    setFormState({
-      ...formState,
+    setValueState({
+      ...valueState,
       [name]: value
     })
     setReflectionState({
@@ -93,18 +93,24 @@ export default function App() {
   const onCheckboxChange = evt => {
     const { name } = evt.target
     const { checked } = evt.target
-    setFormState({
-      ...formState,
-      values: {
-        ...formState.values,
+    
+    setValueState({
+      ...valueState,
+        ...valueState.values,
         [name]: checked,
-      }
     })
   }
 
   const onSubmit = evt => {
-    evt.preventDefault()
+    evt.preventDefault();
   }
+
+  useEffect(() => {
+    valueSchema.isValid(valueState)
+      .then(valid => {
+        setDisabled(!valid)
+      })
+  }, [valueState])  
 
   useEffect(() => {
     formSchema.isValid(reflectionState)
@@ -122,7 +128,7 @@ export default function App() {
       <Switch>
         <Route path = '/values'>
           <ValuesForm
-            values = {formState} 
+            values = {valueState} 
             onInputChange = {onInputChange} 
             onCheckboxChange={onCheckboxChange} 
             onSubmit = {onSubmit} 

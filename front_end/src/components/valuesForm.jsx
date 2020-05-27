@@ -21,7 +21,7 @@ export default function ValuesForm(props){
                     <label>Athletic ability&nbsp;
                         <input type='checkbox'
                                name='athletic'
-                               checked={values.values.athletic}
+                               checked={values.athletic}
                                onChange={onCheckboxChange}
                         />
                     </label>
@@ -29,7 +29,7 @@ export default function ValuesForm(props){
                     <label>Art and literature&nbsp;
                         <input type='checkbox'
                                name='art'
-                               checked={values.values.art}
+                               checked={values.art}
                                onChange={onCheckboxChange}
                         />
                     </label>
@@ -37,7 +37,7 @@ export default function ValuesForm(props){
                     <label>Creativity, discovering, or inventing things to make a difference in the world&nbsp;
                         <input type='checkbox'
                                name='creativity'
-                               checked={values.values.creativity}
+                               checked={values.creativity}
                                onChange={onCheckboxChange}
                         />
                     </label>
@@ -45,7 +45,7 @@ export default function ValuesForm(props){
                     <label>Independence&nbsp;
                         <input type='checkbox'
                                name='independence'
-                               checked={values.values.independence}
+                               checked={values.independence}
                                onChange={onCheckboxChange}
                         />
                     </label>
@@ -53,7 +53,7 @@ export default function ValuesForm(props){
                     <label>Kindness and generosity&nbsp;
                         <input type='checkbox'
                                name='kindness'
-                               checked={values.values.kindness}
+                               checked={values.kindness}
                                onChange={onCheckboxChange}
                         />
                     </label>
@@ -61,7 +61,7 @@ export default function ValuesForm(props){
                     <label>Living in the moment&nbsp;
                         <input type='checkbox'
                                name='living'
-                               checked={values.values.living}
+                               checked={values.living}
                                onChange={onCheckboxChange}
                         />
                     </label>
@@ -69,7 +69,7 @@ export default function ValuesForm(props){
                     <label>Membership in a social group (such as your community, racial group, or school club)&nbsp;
                         <input type='checkbox'
                                name='membership'
-                               checked={values.values.membership}
+                               checked={values.membership}
                                onChange={onCheckboxChange}
                         />
                     </label>                          
@@ -77,7 +77,7 @@ export default function ValuesForm(props){
                     <label>Music&nbsp;
                         <input type='checkbox'
                                name='music'
-                               checked={values.values.music}
+                               checked={values.music}
                                onChange={onCheckboxChange}
                         />
                     </label>
@@ -85,7 +85,7 @@ export default function ValuesForm(props){
                     <label>My community&nbsp;
                         <input type='checkbox'
                                name='community'
-                               checked={values.values.community}
+                               checked={values.community}
                                onChange={onCheckboxChange}
                         />
                     </label>
@@ -93,7 +93,7 @@ export default function ValuesForm(props){
                     <label>My moral principles&nbsp;
                         <input type='checkbox'
                                name='moral'
-                               checked={values.values.moral}
+                               checked={values.moral}
                                onChange={onCheckboxChange}
                         />
                     </label>                            
@@ -101,7 +101,7 @@ export default function ValuesForm(props){
                     <label>Nature and the environment&nbsp;
                         <input type='checkbox'
                                name='nature'
-                               checked={values.values.nature}
+                               checked={values.nature}
                                onChange={onCheckboxChange}
                         />
                     </label>
@@ -109,7 +109,7 @@ export default function ValuesForm(props){
                     <label>Relationships with friends and family&nbsp;
                         <input type='checkbox'
                                name='relationships'
-                               checked={values.values.relationships}
+                               checked={values.relationships}
                                onChange={onCheckboxChange}
                         />
                     </label>
@@ -117,7 +117,7 @@ export default function ValuesForm(props){
                     <label>Sense of humor&nbsp;
                         <input type='checkbox'
                                name='humor'
-                               checked={values.values.humor}
+                               checked={values.humor}
                                onChange={onCheckboxChange}
                         />
                     </label>
@@ -125,22 +125,27 @@ export default function ValuesForm(props){
                     <label>Success in my career&nbsp;
                         <input type='checkbox'
                                name='success'
-                               checked={values.values.success}
+                               checked={values.success}
                                onChange={onCheckboxChange}
                         />
                     </label>
 
                     <label>Other&nbsp;
-                        <input type='text'
+                        {/* <input type='text'
                                name='other'
                                placeholder='Type other value here'
-                               values={values.values.other}
+                               values={values.other}
                                onChange={onInputChange}
-                        />
+                        /> */}
+                        <input type='checkbox'
+                               name='other'
+                               checked={values.other}
+                               onChange={onCheckboxChange}
+                        />                        
                     </label>
 
                 </div>
-                <button disabled={disabled}>Next</button>
+                <button disabled={disabled} onSubmit={onSubmit}>Next</button>
             </form>
         </div>
     )
