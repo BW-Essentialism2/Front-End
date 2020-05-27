@@ -1,10 +1,21 @@
-import React, {useState, useEffect} from 'react';
-import { Route, Switch, Link } from 'react-router-dom'
+import React, { useState, useEffect, createContext } from 'react';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+
+import { PrivateRoute } from './components/PrivateRoute';
+import { LoginForm } from './components/LoginForm';
+import { SignUpForm } from './components/SignUpForm';
+import { LoggedInPage } from './components/LoggedInPage';
+import { axiosWithAuth } from './utils/axiosWithAuth';
+import { FormStateContext } from './context_API';
 import ValuesForm from './components/valuesForm'
 import SelfReflectionForm from './components/selfReflectionForm'
+    
+    
 import * as yup from 'yup'
 import formSchema from './validation/formSchema'
 import valueSchema from './validation/valueSchema'
+import './App.css';
+
 
 const initialValueState = {
 
@@ -54,14 +65,17 @@ const initialFormErrors = {
 const initialValues = []
 const initialDisabled = true
 
-export default function App() {
+
+
+function App() {
+  const [user, setUser] = useState({});
   const [valueState, setValueState] = useState(initialValueState)
   const [formErrors, setFormErrors] = useState(initialFormErrors)
   const [disabled, setDisabled] = useState(initialDisabled)
   const [values, setValues] = useState(initialValues)
   const [reflectionState, setReflectionState] = useState(initialReflectionState)
-
-  const onInputChange= evt => {
+  
+   const onInputChange= evt => {
     const name = evt.target.name
     const value = evt.target.value
 
@@ -90,7 +104,7 @@ export default function App() {
   })  
   }
 
-  const onCheckboxChange = evt => {
+    const onCheckboxChange = evt => {
     const { name } = evt.target
     const { checked } = evt.target
     
@@ -119,14 +133,43 @@ export default function App() {
       })
   }, [reflectionState])  
 
+  //need Axios.get call and pass down state as props ---CONTEXT API??????
+  // useEffect(() => {
+  //   axiosWithAuth()
+  //     .get('/users')
+  //     .then((response) =>
+  //       console.log('response from GET request LOGGEDINPAGE', response)
+  //     )
+  //     .catch((error) =>
+  //       console.log('Error from GET request LOGGEDINPAGE', error)
+  //     );
+  // }, []);
+
   return (
     <div className="App">
-      <nav>
-        <Link to ='/values'>Values Selection</Link>
+      <Router>
+        <Link className="link" to="/login">
+          Log In
+        </Link>
+        <Link className="link" to="/signUp">
+          Sign Up
+        </Link>
+     <Link to ='/values'>Values Selection</Link>
         <Link to ='/reflection'>Self Reflection</Link>
-      </nav>
-      <Switch>
-        <Route path = '/values'>
+
+        <Switch>
+          <FormStateContext.Provider value={valuesState}>
+            {/* <Route path='/ROUTE TO LANDING PAGE IN UI REPO'/>*/}
+            <Route path="/login" component={LoginForm} setUser={setUser} />
+            <Route path="/signUp" component={SignUpForm} setUser={setUser} />
+            <PrivateRoute
+              path="/loggedInPage"
+              component={LoggedInPage}
+              user={user}
+            />
+            {/* <PrivateRoute path="/checkList" component={CheckList} /> */}
+            {/* <PrivateRoute path="/dailySelfRating" component={DailySelfRating} /> */}
+            <Route path = '/values'>
           <ValuesForm
             values = {valueState} 
             onInputChange = {onInputChange} 
@@ -145,7 +188,11 @@ export default function App() {
             errors={formErrors}
           />
         </Route>
-      </Switch>
+          </FormStateContext.Provider>
+        </Switch>
+      </Router>
     </div>
   );
 }
+
+export default App
