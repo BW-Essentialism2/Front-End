@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import { Route, Switch, Link } from 'react-router-dom'
 import ValuesForm from './components/valuesForm'
 import SelfReflectionForm from './components/selfReflectionForm'
+import * as yup from 'yup'
+import formSchema from './validation/formSchema'
 
 const initialFormState = {
   values: {
@@ -62,6 +64,22 @@ export default function App() {
   const onInputChange= evt => {
     const name = evt.target.name
     const value = evt.target.value
+
+    yup
+      .reach(formSchema, name)
+      .validate(value)
+      .then(valid => {
+        setFormErrors({
+          ...formErrors,
+          [name]: ''
+        });
+      })
+      .catch(err => {
+        setFormErrors({
+          ...formErrors,
+          [name]: err.errors[0]
+        });
+      });    
     setFormState({
       ...formState,
       [name]: value
@@ -88,6 +106,13 @@ export default function App() {
     evt.preventDefault()
   }
 
+  useEffect(() => {
+    formSchema.isValid(reflectionState)
+      .then(valid => {
+        setDisabled(!valid)
+      })
+  }, [reflectionState])  
+
   return (
     <div className="App">
       <ValuesForm
@@ -103,6 +128,8 @@ export default function App() {
         values = {reflectionState}
         onInputChange = {onInputChange}
         onSubmit = {onSubmit}
+        disabled={disabled}
+        errors={formErrors}
       />
     </div>
   );

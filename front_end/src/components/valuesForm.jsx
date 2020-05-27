@@ -140,7 +140,7 @@ export default function ValuesForm(props){
                     </label>
 
                 </div>
-                <button>Next</button>
+                <button disabled={disabled}>Next</button>
             </form>
         </div>
     )
