@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch, useHistory } from 'react-router-dom';
 
 import { PrivateRoute } from './components/PrivateRoute';
 import { LoginForm } from './components/LoginForm';
@@ -60,35 +60,36 @@ const initialFormErrors = {
 const initialValues = [];
 const initialDisabled = true;
 
+
+
 function App() {
   const [user, setUser] = useState({});
-  const [valueState, setValueState] = useState(initialValueState);
-  const [formErrors, setFormErrors] = useState(initialFormErrors);
-  const [disabled, setDisabled] = useState(initialDisabled);
-  // const [values, setValues] = useState(initialValues)
-  const [reflectionState, setReflectionState] = useState(
-    initialReflectionState
-  );
+  const [valueState, setValueState] = useState(initialValueState)
+  const [formErrors, setFormErrors] = useState(initialFormErrors)
+  const [disabled, setDisabled] = useState(initialDisabled)
+  const [values, setValues] = useState(initialValues)
+  const [reflectionState, setReflectionState] = useState(initialReflectionState)
+  const history = useHistory()
 
-  const onInputChange = (evt) => {
-    const name = evt.target.name;
-    const value = evt.target.value;
-
-    // yup
-    //   .reach(valueSchema, name)
-    //   .validate(value)
-    //   .then(valid => {
-    //      setFormErrors({
-    //        ...formErrors,
-    //        [name]: ''
-    //      });
-    //    })
-    //   .catch(err => {
-    //      setFormErrors({
-    //        ...formErrors,
-    //        [name]: err.errors[0]
-    //      });
-    //    })
+  const postNewValues = newValues => {
+    axios
+      .post('https://essentialism-3.herokuapp.com/api/values', newValues)
+      .then(res => {
+        setValues([...values, res.data]);
+        console.log(res)
+        history.push('/reflections')
+      })
+      .catch(err => {
+        console.log(err)
+      })
+      .finally(()=>{
+        setValueState(initialValueState)
+      })
+  }
+  
+   const onInputChange= evt => {
+    const name = evt.target.name
+    const value = evt.target.value
 
     yup
       .reach(formSchema, name)
@@ -110,14 +111,18 @@ function App() {
       [name]: value,
     });
     setReflectionState({
-      ...reflectionState,
-      [name]: value,
-    });
-  };
 
-  const onCheckboxChange = (evt) => {
-    const { name } = evt.target;
-    const { checked } = evt.target;
+    ...reflectionState,
+      [name]: value
+  })  
+  }
+
+    const onCheckboxChange = evt => {
+    const { name } = evt.target
+    const { checked } = evt.target
+
+    Check()
+    
 
     setValueState({
       ...valueState,
@@ -126,9 +131,47 @@ function App() {
     });
   };
 
-  const onSubmit = (evt) => {
+
+  function Check() {
+    var count = 0;
+    var checkBoxes = document.getElementsByTagName('input');
+    for (var index = 0; index < checkBoxes.length; index++) {
+        if (checkBoxes[index].type == 'checkbox') {
+            if (!checkBoxes[index].disabled) {
+                count = checkBoxes[index].checked ? (count + 1) : count;
+            }
+        }
+    }
+    if (count > 3) {
+        alert('Must select 3 values');
+        return false;
+    }
+    return true;
+}
+
+  const onSubmit = evt => {
     evt.preventDefault();
-  };
+
+    const newValues = {
+      athletic: values.athletic,
+      art: values.art,
+      creativity: values.creativity,
+      independence: values.independence,
+      kindness: values.kindness,
+      living: values.living,
+      membership: values.membership,
+      music: values.music,
+      community: values.community,
+      moral: values.moral,
+      nature: values.nature,
+      relationships: values.relationships,
+      humor: values.humor,
+      success: values.success,
+      other: values.other,
+    }
+    postNewValues(newValues)
+  }
+
 
   useEffect(() => {
     valueSchema.isValid(valueState).then((valid) => {

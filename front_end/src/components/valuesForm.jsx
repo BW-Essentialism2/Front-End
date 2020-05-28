@@ -1,4 +1,6 @@
 import React from 'react'
+import {useHistory} from 'react-router-dom'
+
 
 export default function ValuesForm(props){
     const {
@@ -11,15 +13,17 @@ export default function ValuesForm(props){
     } = props
     console.log(props)
 
+
+
     return(
         <div className = 'values'>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} >
                 <div>
                     <h3>List of Values</h3>
                 </div>
                 <div>
                     <h4>Choose your top 3</h4>
-                    {/* <div className = 'labelsContainer'>
+                    <div className = 'labelsContainer'>
                     <label>Athletic ability&nbsp;
                         <input type='checkbox'
                                name='athletic'
@@ -139,18 +143,35 @@ export default function ValuesForm(props){
                                checked={values.other}
                                onChange={onCheckboxChange}
                         />
-                        <input type='text'
+                        {/* <input type='text'
                                name='other'
                                placeholder='Type other value here'
                                values={values.other}
                                onChange={onInputChange}
-                        />       
-                    </label> */}
-                {/* </div> */}
+                        />        */}
+                    </label>
                 </div>
-                <button disabled={disabled} onSubmit={onSubmit}>Next</button>
+                </div>
+                <div>
+                    {errors.athletic}
+                    {errors.art}
+                    {errors.creativity}
+                    {errors.independence} 
+                    {errors.kindness} 
+                    {errors.living}
+                    {errors.membership} 
+                    {errors.music} 
+                    {errors.community} 
+                    {errors.moral} 
+                    {errors.nature} 
+                    {errors.relationships} 
+                    {errors.humor} 
+                    {errors.success} 
+                    {errors.other} 
+                </div>
+                <button disabled={disabled}>Next</button>
 
-                <label>Value 1&nbsp;
+                {/* <label>Value 1&nbsp;
                     <select 
                         name='value1' 
                         value={values.value1}
@@ -219,7 +240,7 @@ export default function ValuesForm(props){
                         <option value ='success'>Success in my career</option>
                         <option value ='other'>Other</option>
                     </select>
-                </label>
+                </label> */}
             </form>
         </div>
     )
