@@ -185,7 +185,7 @@ function App() {
             {/* <PrivateRoute path="/checkList" component={CheckList} /> */}
             {/* <PrivateRoute path="/dailySelfRating" component={DailySelfRating} /> */}
             <Route path = '/values'>
-              <ValuesForm className = 'values'
+              <ValuesForm
                 values = {valueState} 
                 onInputChange = {onInputChange} 
                 onCheckboxChange={onCheckboxChange} 

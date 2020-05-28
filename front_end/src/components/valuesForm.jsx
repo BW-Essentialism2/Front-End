@@ -13,12 +13,13 @@ export default function ValuesForm(props){
 
     return(
         <div className = 'values'>
-            <form className='values' onSubmit={onSubmit}>
+            <form onSubmit={onSubmit}>
                 <div>
-                    <h2>Choose the top 3 values most important to you</h2>
+                    <h3>Choose the top 3 values most important to you</h3>
                 </div>
                 <div>
-                    <h3>List of Values</h3>
+                    <h4>List of Values</h4>
+                    <div className = 'labelsContainer'>
                     <label>Athletic ability&nbsp;
                         <input type='checkbox'
                                name='athletic'
@@ -145,7 +146,7 @@ export default function ValuesForm(props){
                                onChange={onInputChange}
                         />        */}
                     </label>
-
+                </div>
                 </div>
                 <button disabled={disabled} onSubmit={onSubmit}>Next</button>
             </form>

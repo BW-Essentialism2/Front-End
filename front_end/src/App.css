@@ -55,11 +55,23 @@ button {
   font-size: 0.8rem;
 }
 
-.values {
-  width: 80%;
+h2 {
+  font-size: 3rem;
+}
+
+h3 {
+  font-size: 2.4rem;
+}
+
+h4 {
+  font-size: 1.8rem;
+}
+
+.values, .reflection {
+  width: 72%;
   margin: 2% auto;
+  padding: 4%;
   padding-bottom: 3%;
-  height: 90vh;
   background-color: #e6f7ff;
   border: 3px double black;
   border-radius: 30px;
@@ -68,6 +80,21 @@ button {
   justify-content: center;
 }
 
-.reflection{
-  width: 50%;
+.reflection input {
+  width: 80%;
+  height: 150px;
+  font-size: 1.2rem;
+}
+
+.values label {
+  font-size: 1.2rem;
+}
+
+.labelsContainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  font-size: 1.2rem;
+  text-align: left;
+  line-height: 1;
 }
