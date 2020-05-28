@@ -38,12 +38,12 @@ export const LoggedInPage = (props) => {
       .get('/api/values')
       .then((response) => {
         console.log('response from GET VALUES request LOGGEDINPAGE', response);
-        // response.data.map((value) => {
-        //   props.setValueState({
-        //     id: value.id,
-        //     value: value.is_set_to
-        //   });
-        // });
+        response.data.map((value) => {
+          props.setValueState({
+            id: value.id,
+            value: value.is_set_to
+          });
+        });
       })
       .catch((error) =>
         console.log('Error from GET VALUES request LOGGEDINPAGE', error)
