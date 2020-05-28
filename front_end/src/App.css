@@ -67,3 +67,7 @@ button {
   flex-direction: column;
   justify-content: center;
 }
+
+.reflection{
+  width: 50%;
+}

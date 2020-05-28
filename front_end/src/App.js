@@ -167,8 +167,10 @@ function App() {
         <Link className="link" to="/signUp">
           Sign Up
         </Link>
-     <Link className="link" to ='/values'>Values Selection</Link>
-        <Link className="link" to ='/reflection'>Self Reflection</Link>
+        <Link className="link" to ='/values'> Values Selection
+        </Link>
+        <Link className="link" to ='/reflection'> Self Reflection
+        </Link>
 
         <Switch>
           <FormStateContext.Provider value={valueState}>
@@ -183,24 +185,24 @@ function App() {
             {/* <PrivateRoute path="/checkList" component={CheckList} /> */}
             {/* <PrivateRoute path="/dailySelfRating" component={DailySelfRating} /> */}
             <Route path = '/values'>
-          <ValuesForm
-            values = {valueState} 
-            onInputChange = {onInputChange} 
-            onCheckboxChange={onCheckboxChange} 
-            onSubmit = {onSubmit} 
-            disabled={disabled} 
-            errors={formErrors}        
-          />
-        </Route>
-        <Route path ='/reflection'>
-          <SelfReflectionForm
-            values = {reflectionState}
-            onInputChange = {onInputChange}
-            onSubmit = {onSubmit}
-            disabled={disabled}
-            errors={formErrors}
-          />
-        </Route>
+              <ValuesForm className = 'values'
+                values = {valueState} 
+                onInputChange = {onInputChange} 
+                onCheckboxChange={onCheckboxChange} 
+                onSubmit = {onSubmit} 
+                disabled={disabled} 
+                errors={formErrors}        
+              />
+            </Route>
+            <Route path ='/reflection'>
+              <SelfReflectionForm
+                values = {reflectionState}
+                onInputChange = {onInputChange}
+                onSubmit = {onSubmit}
+                disabled={disabled}
+                errors={formErrors}
+              />
+            </Route>
           </FormStateContext.Provider>
         </Switch>
       </Router>
