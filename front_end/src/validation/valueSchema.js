@@ -1,21 +1,21 @@
 import * as yup from 'yup'
 
 const valueSchema = yup.object().shape({
-  athletic: yup.string(),
-  art: yup.string(),
-  creativity: yup.string(),
-  independence:  yup.string(),
-  kindness:  yup.string(),
-  living: yup.string(),
-  membership:  yup.string(),
-  music:  yup.string(),
-  community:  yup.string(),
-  moral:  yup.string(),
-  nature:  yup.string(),
-  relationships:  yup.string(),
-  humor:  yup.string(),
-  success:  yup.string(),
-  other:  yup.string(),    
+//   athletic: yup.string(),
+//   art: yup.string(),
+//   creativity: yup.string(),
+//   independence:  yup.string(),
+//   kindness:  yup.string(),
+//   living: yup.string(),
+//   membership:  yup.string(),
+//   music:  yup.string(),
+//   community:  yup.string(),
+//   moral:  yup.string(),
+//   nature:  yup.string(),
+//   relationships:  yup.string(),
+//   humor:  yup.string(),
+//   success:  yup.string(),
+//   other:  yup.string(),    
 })
 
 export default valueSchema
