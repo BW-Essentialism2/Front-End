@@ -19,7 +19,6 @@ import SelfReflectionForm from './components/selfReflectionForm';
 
 import * as yup from 'yup';
 import formSchema from './validation/formSchema';
-import valueSchema from './validation/valueSchema';
 import './App.css';
 
 const initialValueState = {
@@ -180,12 +179,6 @@ function App() {
     // };
     // postNewValues(newValues);
   };
-
-  // useEffect(() => {
-  //   valueSchema.isValid(valueState).then((valid) => {
-  //     setDisabled(!valid);
-  //   });
-  // }, [valueState]);
 
   useEffect(() => {
     formSchema.isValid(reflectionState).then((valid) => {
