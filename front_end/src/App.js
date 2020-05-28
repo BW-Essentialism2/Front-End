@@ -70,6 +70,7 @@ function App() {
   const [disabled, setDisabled] = useState(initialDisabled)
   const [values, setValues] = useState(initialValues)
   const [reflectionState, setReflectionState] = useState(initialReflectionState)
+  const history = useHistory()
 
   const postNewValues = newValues => {
     axios
@@ -77,6 +78,7 @@ function App() {
       .then(res => {
         setValues([...values, res.data]);
         console.log(res)
+        history.push('/reflections')
       })
       .catch(err => {
         console.log(err)

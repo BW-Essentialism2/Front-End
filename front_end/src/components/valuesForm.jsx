@@ -17,7 +17,7 @@ export default function ValuesForm(props){
 
     return(
         <div className = 'values'>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} >
                 <div>
                     <h3>List of Values</h3>
                 </div>
@@ -152,7 +152,24 @@ export default function ValuesForm(props){
                     </label>
                 </div>
                 </div>
-                <button disabled={disabled} onSubmit={onSubmit} >Next</button>
+                <div>
+                    {errors.athletic}
+                    {errors.art}
+                    {errors.creativity}
+                    {errors.independence} 
+                    {errors.kindness} 
+                    {errors.living}
+                    {errors.membership} 
+                    {errors.music} 
+                    {errors.community} 
+                    {errors.moral} 
+                    {errors.nature} 
+                    {errors.relationships} 
+                    {errors.humor} 
+                    {errors.success} 
+                    {errors.other} 
+                </div>
+                <button disabled={disabled}>Next</button>
 
                 {/* <label>Value 1&nbsp;
                     <select 
