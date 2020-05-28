@@ -15,10 +15,11 @@ const valueSchema = yup.object().shape({
 //   relationships:  yup.boolean(),
 //   humor:  yup.boolean(),
 //   success:  yup.boolean(),
-//   other:  yup.boolean(),
-value1: yup.string().required('Value 1 is a required field'),
-value2: yup.string().required('Value 2 is a required field'),
-value3: yup.string().required('Value 3 is a required field'),
+//   other:  yup.boolean().oneOf([true], 'test'),
+// value1: yup.string().required('Value 1 is a required field'),
+// value2: yup.string().required('Value 2 is a required field'),
+// value3: yup.string().required('Value 3 is a required field'),
+    
 })
 
 export default valueSchema
