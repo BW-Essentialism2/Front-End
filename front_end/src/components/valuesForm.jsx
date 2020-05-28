@@ -9,15 +9,17 @@ export default function ValuesForm(props){
         errors,
         onCheckboxChange,
     } = props
+    console.log(props)
 
     return(
-        <div>
+        <div className = 'values'>
             <form onSubmit={onSubmit}>
                 <div>
-                    <h2>Choose the top 3 values most important to you</h2>
+                    <h3>List of Values</h3>
                 </div>
                 <div>
-                    <h3>List of Values</h3>
+                    <h4>Choose your top 3</h4>
+                    {/* <div className = 'labelsContainer'>
                     <label>Athletic ability&nbsp;
                         <input type='checkbox'
                                name='athletic'
@@ -34,7 +36,7 @@ export default function ValuesForm(props){
                         />
                     </label>
 
-                    <label>Creativity, discovering, or inventing things to make a difference in the world&nbsp;
+                    <label>Creativity, discovering, or inventing things&nbsp;
                         <input type='checkbox'
                                name='creativity'
                                checked={values.creativity}
@@ -66,7 +68,7 @@ export default function ValuesForm(props){
                         />
                     </label>
 
-                    <label>Membership in a social group (such as your community, racial group, or school club)&nbsp;
+                    <label>Membership in a social group&nbsp;
                         <input type='checkbox'
                                name='membership'
                                checked={values.membership}
@@ -131,23 +133,96 @@ export default function ValuesForm(props){
                     </label>
 
                     <label>Other&nbsp;
-                        {/* <input type='text'
-                               name='other'
-                               placeholder='Type other value here'
-                               values={values.other}
-                               onChange={onInputChange}
-                        /> */}
+
                         <input type='checkbox'
                                name='other'
                                checked={values.other}
                                onChange={onCheckboxChange}
-                        />                        
-                    </label>
-
+                        />
+                        <input type='text'
+                               name='other'
+                               placeholder='Type other value here'
+                               values={values.other}
+                               onChange={onInputChange}
+                        />       
+                    </label> */}
+                {/* </div> */}
                 </div>
                 <button disabled={disabled} onSubmit={onSubmit}>Next</button>
+
+                <label>Value 1&nbsp;
+                    <select 
+                        name='value1' 
+                        value={values.value1}
+                        onChange = {onInputChange}>
+                        <option value=''>Select a value</option>    
+                        <option value ='athletic'>Athletic ability</option>
+                        <option value='art'>Art and literature</option>
+                        <option value='creativity'>Creativity, discovering, or inventing things</option>
+                        <option value ='independence'>Independence</option>
+                        <option value ='kindness'>Kindness and generosity</option>
+                        <option value ='living'>Living in the moment</option>
+                        <option value ='membership'>Membership in a social group</option>
+                        <option value ='music'>Music</option>
+                        <option value ='community'>My community</option>
+                        <option value ='moral'>My moral principles</option>
+                        <option value ='nature'>Nature and the environment</option>
+                        <option value ='relationships'>Relationships with friends and family</option>
+                        <option value ='humor'>Sense of humor</option>
+                        <option value ='success'>Success in my career</option>
+                        <option value ='other'>Other</option>
+                    </select>
+                </label>
+                <label>Value 2&nbsp;
+                    <select 
+                        name='value2' 
+                        value={values.value2}
+                        onChange = {onInputChange}>
+                        <option value=''>Select a value</option>    
+                        <option value ='athletic'>Athletic ability</option>
+                        <option value='art'>Art and literature</option>
+                        <option value='creativity'>Creativity, discovering, or inventing things</option>
+                        <option value ='independence'>Independence</option>
+                        <option value ='kindness'>Kindness and generosity</option>
+                        <option value ='living'>Living in the moment</option>
+                        <option value ='membership'>Membership in a social group</option>
+                        <option value ='music'>Music</option>
+                        <option value ='community'>My community</option>
+                        <option value ='moral'>My moral principles</option>
+                        <option value ='nature'>Nature and the environment</option>
+                        <option value ='relationships'>Relationships with friends and family</option>
+                        <option value ='humor'>Sense of humor</option>
+                        <option value ='success'>Success in my career</option>
+                        <option value ='other'>Other</option>
+                    </select>
+                </label>
+
+                <label>Value 3&nbsp;
+                    <select 
+                        name='value3' 
+                        value={values.value3}
+                        onChange = {onInputChange}>
+                        <option value=''>Select a value</option>    
+                        <option value ='athletic'>Athletic ability</option>
+                        <option value='art'>Art and literature</option>
+                        <option value='creativity'>Creativity, discovering, or inventing things</option>
+                        <option value ='independence'>Independence</option>
+                        <option value ='kindness'>Kindness and generosity</option>
+                        <option value ='living'>Living in the moment</option>
+                        <option value ='membership'>Membership in a social group</option>
+                        <option value ='music'>Music</option>
+                        <option value ='community'>My community</option>
+                        <option value ='moral'>My moral principles</option>
+                        <option value ='nature'>Nature and the environment</option>
+                        <option value ='relationships'>Relationships with friends and family</option>
+                        <option value ='humor'>Sense of humor</option>
+                        <option value ='success'>Success in my career</option>
+                        <option value ='other'>Other</option>
+                    </select>
+                </label>
             </form>
         </div>
     )
 }
+
 
