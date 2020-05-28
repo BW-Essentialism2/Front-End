@@ -1,5 +1,12 @@
 import React, { useState, useEffect, createContext } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch, useHistory } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+  useHistory,
+} from 'react-router-dom';
+import axios from 'axios';
 
 import { PrivateRoute } from './components/PrivateRoute';
 import { LoginForm } from './components/LoginForm';
@@ -60,36 +67,36 @@ const initialFormErrors = {
 const initialValues = [];
 const initialDisabled = true;
 
-
-
 function App() {
   const [user, setUser] = useState({});
-  const [valueState, setValueState] = useState(initialValueState)
-  const [formErrors, setFormErrors] = useState(initialFormErrors)
-  const [disabled, setDisabled] = useState(initialDisabled)
-  const [values, setValues] = useState(initialValues)
-  const [reflectionState, setReflectionState] = useState(initialReflectionState)
-  const history = useHistory()
+  const [valueState, setValueState] = useState(initialValueState);
+  const [formErrors, setFormErrors] = useState(initialFormErrors);
+  const [disabled, setDisabled] = useState(initialDisabled);
+  const [values, setValues] = useState(initialValues);
+  const [reflectionState, setReflectionState] = useState(
+    initialReflectionState
+  );
+  const history = useHistory();
 
-  const postNewValues = newValues => {
+  const postNewValues = (newValues) => {
     axios
       .post('https://essentialism-3.herokuapp.com/api/values', newValues)
-      .then(res => {
+      .then((res) => {
         setValues([...values, res.data]);
-        console.log(res)
-        history.push('/reflections')
+        console.log(res);
+        history.push('/reflections');
       })
-      .catch(err => {
-        console.log(err)
+      .catch((err) => {
+        console.log(err);
       })
-      .finally(()=>{
-        setValueState(initialValueState)
-      })
-  }
-  
-   const onInputChange= evt => {
-    const name = evt.target.name
-    const value = evt.target.value
+      .finally(() => {
+        setValueState(initialValueState);
+      });
+  };
+
+  const onInputChange = (evt) => {
+    const name = evt.target.name;
+    const value = evt.target.value;
 
     yup
       .reach(formSchema, name)
@@ -111,18 +118,16 @@ function App() {
       [name]: value,
     });
     setReflectionState({
+      ...reflectionState,
+      [name]: value,
+    });
+  };
 
-    ...reflectionState,
-      [name]: value
-  })  
-  }
+  const onCheckboxChange = (evt) => {
+    const { name } = evt.target;
+    const { checked } = evt.target;
 
-    const onCheckboxChange = evt => {
-    const { name } = evt.target
-    const { checked } = evt.target
-
-    Check()
-    
+    Check();
 
     setValueState({
       ...valueState,
@@ -131,25 +136,24 @@ function App() {
     });
   };
 
-
   function Check() {
     var count = 0;
     var checkBoxes = document.getElementsByTagName('input');
     for (var index = 0; index < checkBoxes.length; index++) {
-        if (checkBoxes[index].type == 'checkbox') {
-            if (!checkBoxes[index].disabled) {
-                count = checkBoxes[index].checked ? (count + 1) : count;
-            }
+      if (checkBoxes[index].type == 'checkbox') {
+        if (!checkBoxes[index].disabled) {
+          count = checkBoxes[index].checked ? count + 1 : count;
         }
+      }
     }
     if (count > 3) {
-        alert('Must select 3 values');
-        return false;
+      alert('Must select 3 values');
+      return false;
     }
     return true;
-}
+  }
 
-  const onSubmit = evt => {
+  const onSubmit = (evt) => {
     evt.preventDefault();
 
     const newValues = {
@@ -168,10 +172,9 @@ function App() {
       humor: values.humor,
       success: values.success,
       other: values.other,
-    }
-    postNewValues(newValues)
-  }
-
+    };
+    postNewValues(newValues);
+  };
 
   useEffect(() => {
     valueSchema.isValid(valueState).then((valid) => {
@@ -202,31 +205,29 @@ function App() {
             <Route path="/login" component={LoginForm} setUser={setUser} />
             <Route path="/signUp" component={SignUpForm} setUser={setUser} />
 
-            <PrivateRoute
-              path="/loggedInPage"
-              component={LoggedInPage}
-              setValueState={setValueState}
-            />
-            <PrivateRoute
-              path="/values"
-              component={ValuesForm}
-              values={valueState}
-              onInputChange={onInputChange}
-              onCheckboxChange={onCheckboxChange}
-              onSubmit={onSubmit}
-              disabled={disabled}
-              errors={formErrors}
-            />
+            <PrivateRoute path="/loggedInPage">
+              <LoggedInPage setValueState={setValueState} />
+            </PrivateRoute>
+            <PrivateRoute path="/values">
+              <ValuesForm
+                values={valueState}
+                onInputChange={onInputChange}
+                onCheckboxChange={onCheckboxChange}
+                onSubmit={onSubmit}
+                disabled={disabled}
+                errors={formErrors}
+              />
+            </PrivateRoute>
 
-            <PrivateRoute
-              path="/reflection"
-              component={SelfReflectionForm}
-              values={reflectionState}
-              onInputChange={onInputChange}
-              onSubmit={onSubmit}
-              disabled={disabled}
-              errors={formErrors}
-            />
+            <PrivateRoute path="/reflection">
+              <SelfReflectionForm
+                values={reflectionState}
+                onInputChange={onInputChange}
+                onSubmit={onSubmit}
+                disabled={disabled}
+                errors={formErrors}
+              />
+            </PrivateRoute>
           </Switch>
         </FormStateContext.Provider>
       </Router>
