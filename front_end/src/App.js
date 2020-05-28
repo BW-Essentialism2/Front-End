@@ -112,10 +112,6 @@ function App() {
           [name]: err.errors[0],
         });
       });
-    setValueState({
-      ...valueState,
-      [name]: value,
-    });
     setReflectionState({
       ...reflectionState,
       [name]: value,
@@ -149,6 +145,7 @@ function App() {
       setDisabled(false);
       alert('Review and click next')
       return false;
+      
     }
     else if(count !==3){
       setDisabled(true);

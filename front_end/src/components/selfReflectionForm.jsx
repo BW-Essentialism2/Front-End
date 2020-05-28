@@ -2,7 +2,6 @@ import React from 'react'
 
 export default function SelfReflectionForm(props){
     const { 
-        details, 
         values, 
         onSubmit,
         onInputChange,
