@@ -7,15 +7,13 @@ import { SignUpForm } from './components/SignUpForm';
 import { LoggedInPage } from './components/LoggedInPage';
 import { axiosWithAuth } from './utils/axiosWithAuth';
 import { FormStateContext } from './context_API';
-import ValuesForm from './components/valuesForm'
-import SelfReflectionForm from './components/selfReflectionForm'
-    
-    
-import * as yup from 'yup'
-import formSchema from './validation/formSchema'
-import valueSchema from './validation/valueSchema'
-import './App.css';
+import ValuesForm from './components/valuesForm';
+import SelfReflectionForm from './components/selfReflectionForm';
 
+import * as yup from 'yup';
+import formSchema from './validation/formSchema';
+import valueSchema from './validation/valueSchema';
+import './App.css';
 
 const initialValueState = {
   athletic: false,
@@ -33,21 +31,21 @@ const initialValueState = {
   humor: false,
   success: false,
   other: false,
-}
+};
 
 const initialReflectionState = {
   value1: '',
   value2: '',
   value3: '',
-}
+};
 
 const initialFormErrors = {
-  athletic:'',
-  art:'',
-  creativity:'',
+  athletic: '',
+  art: '',
+  creativity: '',
   independence: '',
   kindness: '',
-  living:'',
+  living: '',
   membership: '',
   music: '',
   community: '',
@@ -57,24 +55,24 @@ const initialFormErrors = {
   humor: '',
   success: '',
   other: '',
-}
+};
 
-const initialValues = []
-const initialDisabled = true
-
-
+const initialValues = [];
+const initialDisabled = true;
 
 function App() {
   const [user, setUser] = useState({});
-  const [valueState, setValueState] = useState(initialValueState)
-  const [formErrors, setFormErrors] = useState(initialFormErrors)
-  const [disabled, setDisabled] = useState(initialDisabled)
+  const [valueState, setValueState] = useState(initialValueState);
+  const [formErrors, setFormErrors] = useState(initialFormErrors);
+  const [disabled, setDisabled] = useState(initialDisabled);
   // const [values, setValues] = useState(initialValues)
-  const [reflectionState, setReflectionState] = useState(initialReflectionState)
-  
-   const onInputChange= evt => {
-    const name = evt.target.name
-    const value = evt.target.value
+  const [reflectionState, setReflectionState] = useState(
+    initialReflectionState
+  );
+
+  const onInputChange = (evt) => {
+    const name = evt.target.name;
+    const value = evt.target.value;
 
     // yup
     //   .reach(valueSchema, name)
@@ -95,119 +93,102 @@ function App() {
     yup
       .reach(formSchema, name)
       .validate(value)
-      .then(valid => {
+      .then((valid) => {
         setFormErrors({
           ...formErrors,
-          [name]: ''
+          [name]: '',
         });
       })
-      .catch(err => {
+      .catch((err) => {
         setFormErrors({
           ...formErrors,
-          [name]: err.errors[0]
+          [name]: err.errors[0],
         });
-      });    
+      });
     setValueState({
       ...valueState,
-      [name]: value
-    })
+      [name]: value,
+    });
     setReflectionState({
-    ...reflectionState,
-      [name]: value
-  })  
-  }
+      ...reflectionState,
+      [name]: value,
+    });
+  };
 
-    const onCheckboxChange = evt => {
-    const { name } = evt.target
-    const { checked } = evt.target
-    
+  const onCheckboxChange = (evt) => {
+    const { name } = evt.target;
+    const { checked } = evt.target;
+
     setValueState({
       ...valueState,
-        ...valueState.values,
-        [name]: checked,
-    })
-  }
+      ...valueState.values,
+      [name]: checked,
+    });
+  };
 
-  const onSubmit = evt => {
+  const onSubmit = (evt) => {
     evt.preventDefault();
-  }
+  };
 
   useEffect(() => {
-    valueSchema.isValid(valueState)
-      .then(valid => {
-        setDisabled(!valid)
-      })
-  }, [valueState])  
+    valueSchema.isValid(valueState).then((valid) => {
+      setDisabled(!valid);
+    });
+  }, [valueState]);
 
   useEffect(() => {
-    formSchema.isValid(reflectionState)
-      .then(valid => {
-        setDisabled(!valid)
-      })
-  }, [reflectionState])  
-
-  //need Axios.get call and pass down state as props ---CONTEXT API??????
-  // useEffect(() => {
-  //   axiosWithAuth()
-  //     .get('/users')
-  //     .then((response) =>
-  //       console.log('response from GET request LOGGEDINPAGE', response)
-  //     )
-  //     .catch((error) =>
-  //       console.log('Error from GET request LOGGEDINPAGE', error)
-  //     );
-  // }, []);
+    formSchema.isValid(reflectionState).then((valid) => {
+      setDisabled(!valid);
+    });
+  }, [reflectionState]);
 
   return (
     <div className="App">
       <Router>
-        <Link className="link" to="/login">
-          Log In
-        </Link>
-        <Link className="link" to="/signUp">
-          Sign Up
-        </Link>
-        <Link className="link" to ='/values'> Values Selection
-        </Link>
-        <Link className="link" to ='/reflection'> Self Reflection
-        </Link>
+        <FormStateContext.Provider value={valueState}>
+          <Link className="link" to="/login">
+            Log In
+          </Link>
+          <Link className="link" to="/signUp">
+            Sign Up
+          </Link>
+          {/* <h1>Please Log In or Sign Up</h1> */}
 
-        <Switch>
-          <FormStateContext.Provider value={valueState}>
+          <Switch>
             {/* <Route path='/ROUTE TO LANDING PAGE IN UI REPO'/>*/}
             <Route path="/login" component={LoginForm} setUser={setUser} />
             <Route path="/signUp" component={SignUpForm} setUser={setUser} />
+
             <PrivateRoute
               path="/loggedInPage"
               component={LoggedInPage}
-              user={user}
+              setValueState={setValueState}
             />
-            {/* <PrivateRoute path="/checkList" component={CheckList} /> */}
-            {/* <PrivateRoute path="/dailySelfRating" component={DailySelfRating} /> */}
-            <Route path = '/values'>
-              <ValuesForm
-                values = {valueState} 
-                onInputChange = {onInputChange} 
-                onCheckboxChange={onCheckboxChange} 
-                onSubmit = {onSubmit} 
-                disabled={disabled} 
-                errors={formErrors}        
-              />
-            </Route>
-            <Route path ='/reflection'>
-              <SelfReflectionForm
-                values = {reflectionState}
-                onInputChange = {onInputChange}
-                onSubmit = {onSubmit}
-                disabled={disabled}
-                errors={formErrors}
-              />
-            </Route>
-          </FormStateContext.Provider>
-        </Switch>
+            <PrivateRoute
+              path="/values"
+              component={ValuesForm}
+              values={valueState}
+              onInputChange={onInputChange}
+              onCheckboxChange={onCheckboxChange}
+              onSubmit={onSubmit}
+              disabled={disabled}
+              errors={formErrors}
+            />
+
+            <PrivateRoute
+              path="/reflection"
+              component={SelfReflectionForm}
+              values={reflectionState}
+              onInputChange={onInputChange}
+              onSubmit={onSubmit}
+              disabled={disabled}
+              errors={formErrors}
+            />
+          </Switch>
+        </FormStateContext.Provider>
       </Router>
     </div>
   );
 }
 
-export default App
+export default App;
