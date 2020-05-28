@@ -9,6 +9,7 @@ export default function ValuesForm(props){
         errors,
         onCheckboxChange,
     } = props
+    console.log(props)
 
     return(
         <div>
