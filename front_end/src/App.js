@@ -149,13 +149,13 @@ function App() {
     }
     else if(count !==3){
       setDisabled(true);
-      alert('Must select 3 values');
     }
     return true;
   }
 
   const onSubmit = (evt) => {
     evt.preventDefault();
+    
 
     // const newValues = {
     //   athletic: values.athletic,

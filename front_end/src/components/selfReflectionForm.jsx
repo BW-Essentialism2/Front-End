@@ -1,4 +1,5 @@
 import React from 'react'
+import {useHistory} from 'react-router-dom'
 
 export default function SelfReflectionForm(props){
     const { 
@@ -8,6 +9,8 @@ export default function SelfReflectionForm(props){
         disabled,
         errors 
     } = props
+
+    const history = useHistory()
 
     return (
         <div className = 'reflection'>
@@ -38,7 +41,7 @@ export default function SelfReflectionForm(props){
                     onChange={onInputChange}
                 />         
             </form>
-            <button disabled={disabled} onSubmit={onSubmit}>Next</button>
+            <button disabled={disabled} onClick={()=> history.push('/loggedInPage')}>Next</button>
         </div>
     )
 }

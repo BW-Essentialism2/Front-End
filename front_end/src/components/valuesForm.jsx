@@ -21,6 +21,7 @@ export default function ValuesForm(props){
                 </div>
                 <div>
                     <h4>Choose your top 3</h4>
+                    <p>Please note that you will not be able to submit if the number of values selected is not equal to 3</p>
                     <div className = 'labelsContainer'>
                     <label>Athletic ability&nbsp;
                         <input type='checkbox'
