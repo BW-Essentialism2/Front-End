@@ -12,8 +12,8 @@ export default function ValuesForm(props){
     console.log(props)
 
     return(
-        <div>
-            <form onSubmit={onSubmit}>
+        <div className = 'values'>
+            <form className='values' onSubmit={onSubmit}>
                 <div>
                     <h2>Choose the top 3 values most important to you</h2>
                 </div>

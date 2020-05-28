@@ -54,3 +54,16 @@ button {
   width: 15%;
   font-size: 0.8rem;
 }
+
+.values {
+  width: 80%;
+  margin: 2% auto;
+  padding-bottom: 3%;
+  height: 90vh;
+  background-color: #e6f7ff;
+  border: 3px double black;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

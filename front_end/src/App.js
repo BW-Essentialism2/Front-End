@@ -167,11 +167,11 @@ function App() {
         <Link className="link" to="/signUp">
           Sign Up
         </Link>
-     <Link to ='/values'>Values Selection</Link>
-        <Link to ='/reflection'>Self Reflection</Link>
+     <Link className="link" to ='/values'>Values Selection</Link>
+        <Link className="link" to ='/reflection'>Self Reflection</Link>
 
         <Switch>
-          <FormStateContext.Provider value={valuesState}>
+          <FormStateContext.Provider value={valueState}>
             {/* <Route path='/ROUTE TO LANDING PAGE IN UI REPO'/>*/}
             <Route path="/login" component={LoginForm} setUser={setUser} />
             <Route path="/signUp" component={SignUpForm} setUser={setUser} />
