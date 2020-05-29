@@ -5,15 +5,13 @@ import {useHistory} from 'react-router-dom'
 export default function ValuesForm(props){
     const {
         values,
-        onInputChange,
         onSubmit,
         disabled,
-        errors,
         onCheckboxChange,
     } = props
     console.log(props)
 
-
+    const history = useHistory()
 
     return(
         <div className = 'values'>
@@ -23,6 +21,7 @@ export default function ValuesForm(props){
                 </div>
                 <div>
                     <h4>Choose your top 3</h4>
+                    <p>Please note that you will not be able to submit if the number of values selected is not equal to 3</p>
                     <div className = 'labelsContainer'>
                     <label>Athletic ability&nbsp;
                         <input type='checkbox'
@@ -152,95 +151,8 @@ export default function ValuesForm(props){
                     </label>
                 </div>
                 </div>
-                <div>
-                    {errors.athletic}
-                    {errors.art}
-                    {errors.creativity}
-                    {errors.independence} 
-                    {errors.kindness} 
-                    {errors.living}
-                    {errors.membership} 
-                    {errors.music} 
-                    {errors.community} 
-                    {errors.moral} 
-                    {errors.nature} 
-                    {errors.relationships} 
-                    {errors.humor} 
-                    {errors.success} 
-                    {errors.other} 
-                </div>
-                <button disabled={disabled}>Next</button>
-
-                {/* <label>Value 1&nbsp;
-                    <select 
-                        name='value1' 
-                        value={values.value1}
-                        onChange = {onInputChange}>
-                        <option value=''>Select a value</option>    
-                        <option value ='athletic'>Athletic ability</option>
-                        <option value='art'>Art and literature</option>
-                        <option value='creativity'>Creativity, discovering, or inventing things</option>
-                        <option value ='independence'>Independence</option>
-                        <option value ='kindness'>Kindness and generosity</option>
-                        <option value ='living'>Living in the moment</option>
-                        <option value ='membership'>Membership in a social group</option>
-                        <option value ='music'>Music</option>
-                        <option value ='community'>My community</option>
-                        <option value ='moral'>My moral principles</option>
-                        <option value ='nature'>Nature and the environment</option>
-                        <option value ='relationships'>Relationships with friends and family</option>
-                        <option value ='humor'>Sense of humor</option>
-                        <option value ='success'>Success in my career</option>
-                        <option value ='other'>Other</option>
-                    </select>
-                </label>
-                <label>Value 2&nbsp;
-                    <select 
-                        name='value2' 
-                        value={values.value2}
-                        onChange = {onInputChange}>
-                        <option value=''>Select a value</option>    
-                        <option value ='athletic'>Athletic ability</option>
-                        <option value='art'>Art and literature</option>
-                        <option value='creativity'>Creativity, discovering, or inventing things</option>
-                        <option value ='independence'>Independence</option>
-                        <option value ='kindness'>Kindness and generosity</option>
-                        <option value ='living'>Living in the moment</option>
-                        <option value ='membership'>Membership in a social group</option>
-                        <option value ='music'>Music</option>
-                        <option value ='community'>My community</option>
-                        <option value ='moral'>My moral principles</option>
-                        <option value ='nature'>Nature and the environment</option>
-                        <option value ='relationships'>Relationships with friends and family</option>
-                        <option value ='humor'>Sense of humor</option>
-                        <option value ='success'>Success in my career</option>
-                        <option value ='other'>Other</option>
-                    </select>
-                </label>
-
-                <label>Value 3&nbsp;
-                    <select 
-                        name='value3' 
-                        value={values.value3}
-                        onChange = {onInputChange}>
-                        <option value=''>Select a value</option>    
-                        <option value ='athletic'>Athletic ability</option>
-                        <option value='art'>Art and literature</option>
-                        <option value='creativity'>Creativity, discovering, or inventing things</option>
-                        <option value ='independence'>Independence</option>
-                        <option value ='kindness'>Kindness and generosity</option>
-                        <option value ='living'>Living in the moment</option>
-                        <option value ='membership'>Membership in a social group</option>
-                        <option value ='music'>Music</option>
-                        <option value ='community'>My community</option>
-                        <option value ='moral'>My moral principles</option>
-                        <option value ='nature'>Nature and the environment</option>
-                        <option value ='relationships'>Relationships with friends and family</option>
-                        <option value ='humor'>Sense of humor</option>
-                        <option value ='success'>Success in my career</option>
-                        <option value ='other'>Other</option>
-                    </select>
-                </label> */}
+                <button disabled={disabled}
+                onClick={() => history.push('/reflection')}>Next</button>
             </form>
         </div>
     )

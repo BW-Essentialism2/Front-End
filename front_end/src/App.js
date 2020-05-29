@@ -1,4 +1,5 @@
 import React, { useState, useEffect, createContext } from 'react';
+import axios from 'axios'
 import {
   BrowserRouter as Router,
   Route,
@@ -6,7 +7,6 @@ import {
   Switch,
   useHistory,
 } from 'react-router-dom';
-import axios from 'axios';
 
 import { PrivateRoute } from './components/PrivateRoute';
 import { LoginForm } from './components/LoginForm';
@@ -19,7 +19,6 @@ import SelfReflectionForm from './components/selfReflectionForm';
 
 import * as yup from 'yup';
 import formSchema from './validation/formSchema';
-import valueSchema from './validation/valueSchema';
 import './App.css';
 
 const initialValueState = {
@@ -64,7 +63,7 @@ const initialFormErrors = {
   other: '',
 };
 
-const initialValues = [];
+
 const initialDisabled = true;
 
 function App() {
@@ -72,27 +71,9 @@ function App() {
   const [valueState, setValueState] = useState(initialValueState);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
-  const [values, setValues] = useState(initialValues);
   const [reflectionState, setReflectionState] = useState(
     initialReflectionState
   );
-  const history = useHistory();
-
-  const postNewValues = (newValues) => {
-    axios
-      .post('https://essentialism-3.herokuapp.com/api/values', newValues)
-      .then((res) => {
-        setValues([...values, res.data]);
-        console.log(res);
-        history.push('/reflections');
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setValueState(initialValueState);
-      });
-  };
 
   const onInputChange = (evt) => {
     const name = evt.target.name;
@@ -113,10 +94,6 @@ function App() {
           [name]: err.errors[0],
         });
       });
-    setValueState({
-      ...valueState,
-      [name]: value,
-    });
     setReflectionState({
       ...reflectionState,
       [name]: value,
@@ -146,41 +123,21 @@ function App() {
         }
       }
     }
-    if (count > 3) {
-      alert('Must select 3 values');
+    if (count === 3) {
+      setDisabled(false);
+      alert('Review and click next')
       return false;
+      
+    }
+    else if(count !==3){
+      setDisabled(true);
     }
     return true;
   }
 
   const onSubmit = (evt) => {
     evt.preventDefault();
-
-    const newValues = {
-      athletic: values.athletic,
-      art: values.art,
-      creativity: values.creativity,
-      independence: values.independence,
-      kindness: values.kindness,
-      living: values.living,
-      membership: values.membership,
-      music: values.music,
-      community: values.community,
-      moral: values.moral,
-      nature: values.nature,
-      relationships: values.relationships,
-      humor: values.humor,
-      success: values.success,
-      other: values.other,
-    };
-    postNewValues(newValues);
   };
-
-  useEffect(() => {
-    valueSchema.isValid(valueState).then((valid) => {
-      setDisabled(!valid);
-    });
-  }, [valueState]);
 
   useEffect(() => {
     formSchema.isValid(reflectionState).then((valid) => {
