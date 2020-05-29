@@ -16,28 +16,30 @@ import { axiosWithAuth } from './utils/axiosWithAuth';
 import { FormStateContext } from './context_API';
 import ValuesForm from './components/valuesForm';
 import SelfReflectionForm from './components/selfReflectionForm';
+import { Projects } from './components/Projects';
+import { Compare } from './components/Compare';
+import { Choices } from './components/Choices';
 
 import * as yup from 'yup';
 import formSchema from './validation/formSchema';
 import './App.css';
 
-const initialValueState = {
-  athletic: false,
-  art: false,
-  creativity: false,
-  independence: false,
-  kindness: false,
-  living: false,
-  membership: false,
-  music: false,
-  community: false,
-  moral: false,
-  nature: false,
-  relationships: false,
-  humor: false,
-  success: false,
-  other: false,
-};
+const initialValueState = [
+  { athletic: true },
+  { art: false },
+  { creativity: false },
+  { independence: false },
+  { kindness: false },
+  { living: false },
+  { membership: false },
+  { music: true },
+  { community: false },
+  { moral: false },
+  { nature: false },
+  { relationships: false },
+  { humor: false },
+  { success: true },
+];
 
 const initialReflectionState = {
   value1: '',
@@ -155,10 +157,15 @@ function App() {
           <Link className="link" to="/signUp">
             Sign Up
           </Link>
-          {/* <h1>Please Log In or Sign Up</h1> */}
+          <Link className="link" to="/">
+            Sign Out
+          </Link>
 
           <Switch>
             {/* <Route path='/ROUTE TO LANDING PAGE IN UI REPO'/>*/}
+            <Route exact path="/">
+              <h1>Please Log In or Sign Up</h1>
+            </Route>
             <Route path="/login" component={LoginForm} setUser={setUser} />
             <Route path="/signUp" component={SignUpForm} setUser={setUser} />
 
@@ -184,6 +191,15 @@ function App() {
                 disabled={disabled}
                 errors={formErrors}
               />
+            </PrivateRoute>
+            <PrivateRoute path="/projects">
+              <Projects />
+            </PrivateRoute>
+            <PrivateRoute path="/compare">
+              <Compare />
+            </PrivateRoute>
+            <PrivateRoute path="/choices">
+              <Choices />
             </PrivateRoute>
           </Switch>
         </FormStateContext.Provider>

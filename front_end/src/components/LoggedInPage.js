@@ -6,7 +6,7 @@ import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { FormStateContext } from '../context_API/index';
 
 export const LoggedInPage = (props) => {
-  console.log('this is props', props);
+  // console.log('this is props', props);
   const [loggedInUser, setLoggedInUser] = useState({});
   // console.log({ loggedInUser });
   const history = useHistory();
@@ -33,23 +33,6 @@ export const LoggedInPage = (props) => {
       );
   }, []);
 
-  useEffect(() => {
-    axiosWithAuth()
-      .get('/api/values')
-      .then((response) => {
-        console.log('response from GET VALUES request LOGGEDINPAGE', response);
-        response.data.map((value) => {
-          props.setValueState({
-            id: value.id,
-            value: value.is_set_to
-          });
-        });
-      })
-      .catch((error) =>
-        console.log('Error from GET VALUES request LOGGEDINPAGE', error)
-      );
-  }, []);
-
   // useEffect(() => {
   //   axiosWithAuth()
   //     .delete(`/api/delete/${id}`)
@@ -61,16 +44,13 @@ export const LoggedInPage = (props) => {
 
   return (
     <div className="login">
-      <h1>{`Thank You for Logging In ${loggedInUser.firstname}`}</h1>
-      {/* {values.values.map((value) => {
-        if (values.values) {
-          return <div>Current Choice: {value}</div>;
-        } else {
-          return null;
-        }
-      })} */}
+      <h1>{`Welcome, thanks for logging in ${loggedInUser.firstname}`}</h1>
+      {/* <Choices/> */}
       <button className="editBTN" onClick={() => history.push('/values')}>
         Make/Edit Your Choices
+      </button>
+      <button className="editBTN" onClick={() => history.push('/projects')}>
+        Edit Your Projects
       </button>
       <button
         className="deactivateBTN"
