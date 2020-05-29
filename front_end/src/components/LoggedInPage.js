@@ -12,7 +12,7 @@ export const LoggedInPage = (props) => {
   const history = useHistory();
 
   const values = useContext(FormStateContext);
-  // console.log({ values });
+  console.log({ values });
 
   useEffect(() => {
     axiosWithAuth()

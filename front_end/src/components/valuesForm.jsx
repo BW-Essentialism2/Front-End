@@ -1,17 +1,41 @@
-import React from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import {useHistory} from 'react-router-dom'
+import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { FormStateContext } from '../context_API/index';
 
 
 export default function ValuesForm(props){
     const {
-        values,
+        // values,
         onSubmit,
         disabled,
         onCheckboxChange,
     } = props
-    console.log(props)
+    // console.log(props)
+
+    const [loggedValues, setLoggedValues] = useState({});
 
     const history = useHistory()
+
+      const values = useContext(FormStateContext);
+  console.log({ values });
+
+    useEffect(()=>{
+    axiosWithAuth()
+    .get('/api/values')
+    .then((response)=>{
+      console.log('response from GET VALUES request VALUESFORM', values);
+      response.data.map((item) => {
+          setLoggedValues({
+            values: item.values,
+          })
+        
+      })   
+    })
+    .catch((error) => {
+        console.log('Error from GET VALUES request VALUESFORM', error)
+    })
+  },[]);
 
     return(
         <div className = 'values'>
@@ -70,7 +94,6 @@ export default function ValuesForm(props){
                                onChange={onCheckboxChange}
                         />
                     </label>
-
                     <label>Membership in a social group&nbsp;
                         <input type='checkbox'
                                name='membership'
@@ -142,12 +165,6 @@ export default function ValuesForm(props){
                                checked={values.other}
                                onChange={onCheckboxChange}
                         />
-                        {/* <input type='text'
-                               name='other'
-                               placeholder='Type other value here'
-                               values={values.other}
-                               onChange={onInputChange}
-                        />        */}
                     </label>
                 </div>
                 </div>

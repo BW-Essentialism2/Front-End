@@ -24,22 +24,41 @@ import * as yup from 'yup';
 import formSchema from './validation/formSchema';
 import './App.css';
 
-const initialValueState = [
-  { athletic: true },
-  { art: false },
-  { creativity: false },
-  { independence: false },
-  { kindness: false },
-  { living: false },
-  { membership: false },
-  { music: true },
-  { community: false },
-  { moral: false },
-  { nature: false },
-  { relationships: false },
-  { humor: false },
-  { success: true },
-];
+// const initialValueState = [
+//   { athletic: true },
+//   { art: false },
+//   { creativity: false },
+//   { independence: false },
+//   { kindness: false },
+//   { living: false },
+//   { membership: false },
+//   { music: true },
+//   { community: false },
+//   { moral: false },
+//   { nature: false },
+//   { relationships: false },
+//   { humor: false },
+//   { success: true },
+//   { other: false },
+// ];
+
+const initialValueState = {
+  athletic: false,
+  art: false,
+  creativity: false,
+  independence: false,
+  kindness: false,
+  living: false,
+  membership: false,
+  music: false,
+  community: false,
+  moral: false,
+  nature: false,
+  relationships: false,
+  humor: false,
+  success: false,
+  other: false,
+};
 
 const initialReflectionState = {
   value1: '',
