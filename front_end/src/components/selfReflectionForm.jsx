@@ -7,7 +7,8 @@ export default function SelfReflectionForm(props){
         onSubmit,
         onInputChange,
         disabled,
-        errors 
+        errors,
+        details,
     } = props
 
     const history = useHistory()

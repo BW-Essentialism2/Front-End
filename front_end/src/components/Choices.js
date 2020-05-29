@@ -6,9 +6,11 @@ export const Choices = () => {
   const values = useContext(FormStateContext);
   console.log('values in choices', values);
 
+  console.log(Object.keys(values))
+
   return (
     <div>
-      {values.map((value) => {
+      {/* {values.map((value) => {
         if (value.athletic) {
           return <h4>{'hello'}</h4>;
         } else {
@@ -21,7 +23,11 @@ export const Choices = () => {
         } else {
           return null;
         }
-      })}
+      })} */}
+
+      {Object.keys(values).filter(choice => values === true)
+      }
+
     </div>
   );
 };

@@ -16,20 +16,20 @@ export default function ValuesForm(props){
     const [loggedValues, setLoggedValues] = useState({});
 
     const history = useHistory()
-
-      const values = useContext(FormStateContext);
-  console.log({ values });
+    const values = useContext(FormStateContext);
+    console.log({ values });
 
     useEffect(()=>{
     axiosWithAuth()
     .get('/api/values')
     .then((response)=>{
-      console.log('response from GET VALUES request VALUESFORM', values);
+      console.log('response from GET VALUES request VALUESFORM', response.data);
       response.data.map((item) => {
           setLoggedValues({
-            values: item.values,
+            id: item.id,
+            name: item.name,
+            
           })
-        
       })   
     })
     .catch((error) => {
