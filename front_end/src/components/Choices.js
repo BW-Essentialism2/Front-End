@@ -26,7 +26,12 @@ export const Choices = () => {
       })} */}
 
       {Object.keys(values).filter(choice => values === true)
+
       }
+
+      {/* {Object.keys(values).map((choice)=> {
+        return (choice)
+      })} */}
 
     </div>
   );
